@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link
+	href='http://fonts.googleapis.com/css?family=Oswald:400,300|Aguafina+Script'
+	rel='stylesheet' type='text/css' />
+<meta name="format-detection" content="telephone=yes" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" type="text/css"
+	href="css/jquery.mobile-1.4.5.min.css" />
+
+<title>EasyKcal</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="js/jquery.p2r.min.js"></script>
+
+<script type="text/javascript" src="js/jquery-dateFormat.min.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+<script src="//cdn.auth0.com/js/lock-7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).bind("mobileinit", function() {
+	$.mobile.defaultPageTransition = 'slide';
+    });
+</script>
+
+<script type="text/javascript" src="cordova.js"></script>
+<!--remove js/ before sending to github-->
+<script type="text/javascript" src="js/script.js"></script>
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+
+<body>
+	<div id="fb-root"></div>
+
+	<div data-role="page" id="home">
+		<div data-role="panel" id="firstpanel" class="firstpanel" data-display="overlay"></div>
+		<div class="header" data-role="header" data-position="fixed">
+			<a href="#firstpanel" class="menutopbutton">MENU</a>
+			<img src="img/logga.png" alt="EasyKcal mobile" />
+		</div>
+
+		<div data-role="content">
+			<div id="mainbox">Easy Kcal - så blir det lite lättare.</div>
+			<div id="mainmenu-box">
+				<div class="menu-box" id="update-db">Uppdatera databasen</div>
+				<div class="menu-box" id="minalistor">Mina listor</div>
+				<div class="menu-box" id="network_info">Should show network info...</div>
+			</div>
+			
+		</div>
+		<div class="footer" data-role="footer" data-position="fixed"></div>
+	</div>
+
+
+	<!-- 
+		Login page
+	 -->
+
+	<div data-role="page" id="page-login">
+
+		<div data-role="content">
+			<img src="img/logga.png" alt="EasyKcal mobile" class="login-logo" />
+			<div id="login-box" class="login-box">
+				<input type="text" id="username" name="username"
+					placeholder="Användarnamn" />
+					<input type="password" id="password"
+					name="password" placeholder="Lösenord" />
+				<div class="menu_button" id="login">Login</div>
+			</div>
+			<div id="login-info"></div>
+			<div class="inner-box">
+				If you have no account yet, just register on this page: <a
+				href="http://easykcal-app.com/auth/register">easykcal-app.com</a>
+			</div>
+		</div>
+		<div class="footer" data-role="footer" data-position="fixed"></div>
+
+	</div>
+
+	<!-- 
+		Make deal page
+	 -->
+
+	<div data-role="page" id="salpos-page">
+		<div data-role="panel" id="secondpanel" class="firstpanel" data-display="overlay"></div>
+
+		<div class="header" data-role="header" data-position="fixed">
+			<a href="#secondpanel" class="menutopbutton">MENU</a>
+			<img src="img/logga.png" alt="EasyKcal mobile" />
+		</div>
+		
+		<div data-role="content">
+			<div id="mainbox">
+				<div id="salpos-topinfo">
+					<h1 id="salpos-head">Sal 1 - Position 3</h1>
+					<h4 id="salspo-date" style="text-align: center;">2015-05-05</h4>
+					<p id="texten">Här kan det stå en trave text om det skulle behövas någon övrig information.</p>
+					<div class="layout-box salpos-kcal" id="kcal-total">Kcal<br />330k</div>
+					<div class="layout-box salpos-liquid" id="liquid-total">Vätska<br />200ml</div>
+				</div>
+			</div>
+			<div id="addfoodbox" class="layout-box">
+				<h4>Lägg till en ny</h4>
+				<select id="category">
+					<option value="noo">Välj en kategori</option>
+				</select>
+				<select id="food">
+					<option value="noo">Välj en</option>
+				</select>
+				Mängd i <span id="unit">ml</span><input type="number" id="antal" />
+				<input type="button" id="add-food" value="+"/>	
+			</div>
+			<div id="foodlistbox">
+				En massa olika mat, millilitrar och sånt.
+			</div>
+		</div>
+		<div class="footer" data-role="footer" data-position="fixed"></div>
+
+	</div>
+
+
+	<!-- 
+		Page with a list of my deals
+	 -->
+
+	<div data-role="page" id="page-lists">
+		<div data-role="panel" id="thirdpanel" class="firstpanel" data-display="overlay"></div>
+		<div class="header" data-role="header" data-position="fixed">
+			<a href="#thirdpanel" class="menutopbutton">MENU</a>
+			<img src="img/logga.png" alt="EasyKcal mobile" />
+		</div>
+
+		<div data-role="content">
+			<div id="mainbox">
+				Fin lista med alla salar. De kan vara antingen ett nummer eller en text.
+				<table>
+					<tr><td><input type="text" id="sal" value="" placeholder="Sal" /></td>
+					<td><input type="text" id="position" value="" placeholder="Position" /></td></tr>
+					<tr><td colspan=2><input type='text' class='date' id='listdate' name='listdate' placeholder= 'Datum' />
+					<textarea id="texten" placeholder="Valfri text om patienten"></textarea>
+					<input type="button" id="add-list-button" value="+"/>
+					</td></tr>
+				</table>
+			</div>
+			<div id="postitions-listbox">
+				<div class="thinking"></div>
+			</div>
+		</div>
+
+
+
+		<div data-role="popup" id="popup-accept-deal" class="popup-box">
+			<div data-role="content">
+				<div id="popup-content">Typ en poppupp eller nåt. med text
+					etc.</div>
+			</div>
+		</div>
+
+
+		<div class="footer" data-role="footer" data-position="fixed"></div>
+
+	</div>
+
+
+	<!-- 
+		Page with a list of settings
+	 -->
+
+	<div data-role="page" id="page-settings">
+		<div data-role="panel" id="fourthpanel" class="firstpanel"
+			data-display="overlay"></div>
+		<div class="header" data-role="header" data-position="fixed">
+			<a href="#fourthpanel" class="menutopbutton">MENU</a>
+			<img src="img/logga.png" alt="EasyKcal mobile" />
+		</div>
+
+		<div data-role="content">
+			<div id="mainbox">
+				<h1>Settings</h1>
+			</div>
+			<div id="settings-listbox">
+					<h2>Warnings</h2>
+
+					<p>If you for some reason want to see a lot of warnings pop up
+						now and then, just check this box. :)</p>
+
+					<select id="settings-warnings" name="settings-warnings" data-role="flipswitch">         
+						<option value="off">Off</option>         
+						<option value="on">On</option>
+					</select>
+					<hr />
+					<h2>Show rejected deals</h2>
+
+					<p>To hide the rejected deals in list</p>
+
+					<select id="settings-rejecteddeals" name="settings-rejecteddeals" data-role="flipswitch">         
+						<option value="on">On</option>
+						<option value="off">Off</option>         
+					</select>
+					
+					<hr />
+					<h2>Currency</h2>
+
+					<p>Pick your default currency.</p>
+
+					<select id="settings-currency" name="settings-currency">         
+						<option value="SEK">Svenska kronor</option>         
+						<option value="NOK">Norska kronor</option>         
+						<option value="USD">US Dollar</option>
+						<option value="UKP">UK Pound</option>
+					</select>					
+			</div>
+		</div>
+
+
+
+		<div data-role="popup" id="popup-accept-deal" class="popup-box">
+			<div data-role="content">
+				<div id="popup-content">Typ en poppupp eller nåt. med text
+					etc.</div>
+			</div>
+		</div>
+
+
+		<div class="footer" data-role="footer" data-position="fixed"></div>
+
+	</div>
+
+</body>
+</html>

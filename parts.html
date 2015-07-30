@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- The left side menu -->
+	<div id="parts_menu">
+		<br />
+		<br />
+		<h1>Navigation</h1>
+		<div class="left-menu">
+			<ul>
+				<li id="menu-logout">Logout</li>
+				<li id="menu-home">Hem</li>
+				<li id="page-lists">Listor</li>
+				<li id="update-db">Uppdatera databas</li>
+				
+				<!-- <li>Listor
+					<ul>
+						<li id="menu-lists-today">Dagens</li>
+						<li id="menu-lists-get">Hämta</li>
+					</ul>
+				</li>
+				
+				<li id="menu-page-settings">Settings</li>
+				 -->
+				<!-- <li id="menu-update-info">Test: Update deal info</li>
+				<li id="menu-reset-form">Test: Reset Deal Form</li>
+				 -->
+			</ul>
+
+		</div>
+	</div>
+
+	<!-- Popup box -->
+	<div id="parts_popup" class="popup_box"></div>
+
+	<!-- Login box -->
+	<div id="parts_login" class="login_box">
+		<input type="text" id="username" name="username"
+			placeholder="Användarnamn" /> <input type="password" id="password"
+			name="password" placeholder="Lösenord" />
+		<div class="menu_button" id="login">Login</div>
+		<div class="inner-box">
+			If you have no account yet, just register on this page: <a
+				href="http://easykcal-app.com/auth/register">easykcal-app.com</a>
+		</div>
+	</div>
+
+	<!-- The popup for finding user. -->
+	<div id="parts_finduser" class="parts_finduser">
+		<h1>Find User</h1>
+		<div id="finduser">
+			<input type="text" id="find-username" name="find-username"
+				placeholder="Email" />
+			<div class="menu_button" id="finduser-button">Find</div>
+		</div>
+		<div id="finduser-response">Find a user by entering the email
+			address used on EasyKcal</div>
+		<input type="hidden" id="dealwith-userid" value="" />
+	</div>
+
+</body>
+</html>
