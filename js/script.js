@@ -158,6 +158,7 @@ $(function() {
 			role : 'page'
 	    		});
 	    		setCategories("category");
+	    		$("#addfoodbox input").val("");
 	    		update_salpos_info(current_edit_id);
 	    		update_food_list(current_edit_id);
 	    	break;
