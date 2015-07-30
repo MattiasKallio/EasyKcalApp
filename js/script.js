@@ -55,7 +55,7 @@ $(function() {
 	    // checkConnection();
 	    checkAuth();
 	    show_warnings = window.localStorage.getItem("settings-warnings") == "on" ? true : false;
-	    show_rejected_deals = window.localStorage.getItem("settings-rejecteddeals") == "on" ? true : false;
+	    //show_rejected_deals = window.localStorage.getItem("settings-rejecteddeals") == "on" ? true : false;
 
 	    klog("You have the settings for warnings on, this is one.");
 	    // check network status
@@ -370,12 +370,10 @@ function update_db(tx) {
  * @param texten
  */
 function add_new_list(sal, pos, listdate, texten) {
-    db.transaction(
-	            function(tx) {
-	                // tx.executeSql('DROP TABLE IF EXISTS datelist');
-	                tx
-	                        .executeSql("CREATE TABLE IF NOT EXISTS datelist (id INTEGER PRIMARY KEY AUTOINCREMENT,listdate DATE NOT NULL, sal TEXT NOT NULL,position TEXT NOT NULL,texten TEXT)");
-	            }, errorCB, successCB);
+    db.transaction(function(tx) {
+	// tx.executeSql('DROP TABLE IF EXISTS datelist');
+	tx.executeSql("CREATE TABLE IF NOT EXISTS datelist (id INTEGER PRIMARY KEY AUTOINCREMENT,listdate DATE NOT NULL, sal TEXT NOT NULL,position TEXT NOT NULL,texten TEXT)");
+    }, errorCB2, successCB);
 
     db.transaction(function(tx) {
 	tx.executeSql('INSERT INTO datelist(listdate,sal,position,texten) VALUES ("' + listdate + '", "' + sal + '", "' + pos + '", "' + texten + '")');
@@ -564,6 +562,11 @@ function errorCB(err) {
     alert("Error processing SQL: " + err.code);
 }
 
+//function will be called when an error occurred
+function errorCB2(err) {
+    alert("Error processing SQL: " + err.code);
+}
+
 // function will be called when process succeed
 function successCB() {
     console.log("success!");
@@ -613,6 +616,7 @@ function checkAuth() {
 	}
     });
 }
+
 
 function klog(stringout) {
     if (show_warnings)
